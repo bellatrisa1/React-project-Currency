@@ -1,70 +1,19 @@
-# Getting Started with Create React App
+Логика работы проекта
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Технологии, использованные в проекте:
+1. React для создания пользовательского интерфейса.
+2. Hooks (useState, useEffect) для управления состоянием и выполнения побочных эффектов.
+3. Fetch API для получения данных о курсах валют с внешнего API.
 
-## Available Scripts
+Основные компоненты:
+1. App.js: Основной компонент, который управляет состоянием приложения, выполняет запросы к API и передает данные в дочерние компоненты.
+2. Block.js: Компонент, отвечающий за отображение блока конвертации валют с возможностью выбора валюты и ввода суммы.
 
-In the project directory, you can run:
+Логика работы:
+1. Запрос данных с API: Внутри компонента App используется хук useEffect для выполнения запроса к API валют при первом рендере. Данные запрашиваются с помощью fetch и сохраняются в состоянии через хук useState. Если запрос завершается с ошибкой, выводится предупреждение для пользователя.
 
-### `npm start`
+2. Состояние и управление данными: Состояние приложения хранит текущие курсы валют, которые получены с API. Эти данные используются для расчета значений конвертации. Компоненты Block получают через пропсы значение валюты и сумму для конвертации, а также функцию для изменения валюты.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. Выбор валюты и ввод суммы: Компонент Block отображает список доступных валют. При выборе валюты вызывается переданная функция onChangeCurrency, которая обновляет выбранную валюту в родительском компоненте. Также компонент содержит поле ввода для суммы, где при изменении значения вызывается функция onChangeValue.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+4. Конвертация валюты: Когда пользователь выбирает валюту или вводит сумму, эти данные можно использовать для динамической конвертации. Курс валюты берется из состояния, в котором хранятся данные, полученные с API, и с помощью него можно пересчитать суммы.
